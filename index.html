@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>编程学习之旅 | 首页</title>
-    <meta name="description" content="一个专注于编程教育的网站，提供系统化的学习内容">
+    <title>非凡教育 AM F4 刷题机器人 | 首页</title>
+    <meta name="description" content="专注于AM F4考试辅导的教育平台，提供系统化的学习内容">
     <style>
         /* 重置默认样式 */
         * {
@@ -199,6 +199,58 @@
             text-decoration: underline;
         }
 
+        /* 教师阵容样式 */
+        .teachers {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .teachers h2 {
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+
+        .teacher-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .teacher-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .teacher-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .teacher-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .teacher-title {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
         /* 页脚样式 */
         footer {
             background-color: #2c3e50;
@@ -262,7 +314,7 @@
                 margin: 0.5rem 0;
             }
             
-            .feature-cards {
+            .feature-cards, .teacher-cards {
                 flex-direction: column;
                 align-items: center;
             }
@@ -279,15 +331,14 @@
     <!-- 头部区域 -->
     <header>
         <div class="logo">
-            <h1>编程学习之旅</h1>
+            <h1>非凡教育 AM F4 刷题机器人</h1>
         </div>
         <nav>
             <ul>
                 <li><a href="index.html">首页</a></li>
                 <li><a href="chapters.html">章节目录</a></li>
-                <li><a href="resources.html">资源</a></li>
+                <li><a href="teachers.html">教师阵容</a></li>
                 <li><a href="about.html">关于</a></li>
-                <li><a href="contact.html">联系</a></li>
             </ul>
         </nav>
     </header>
@@ -296,8 +347,8 @@
     <main>
         <!-- 欢迎区域 -->
         <section class="hero">
-            <h2>欢迎来到编程学习之旅</h2>
-            <p>一个帮助编程初学者从零开始学习的教育平台</p>
+            <h2>欢迎来到非凡教育 AM F4 刷题机器人</h2>
+            <p>一个专注于AM F4考试辅导的专业平台</p>
             <a href="chapters.html" class="cta-button">开始学习</a>
         </section>
 
@@ -307,15 +358,15 @@
             <div class="feature-cards">
                 <div class="card">
                     <h3>系统化学习</h3>
-                    <p>精心设计的10个章节，从基础到进阶，循序渐进</p>
+                    <p>精心设计的10个章节，根据考试大纲设计，循序渐进</p>
                 </div>
                 <div class="card">
                     <h3>实用示例</h3>
                     <p>每个概念都配有实际案例，帮助你理解和应用</p>
                 </div>
                 <div class="card">
-                    <h3>互动练习</h3>
-                    <p>通过动手实践巩固所学知识</p>
+                    <h3>刷题训练</h3>
+                    <p>通过大量练习题巩固所学知识，提高解题能力</p>
                 </div>
             </div>
         </section>
@@ -325,22 +376,53 @@
             <h2>课程章节预览</h2>
             <div class="chapters-grid">
                 <div class="chapter">
-                    <h3>第1章：编程基础</h3>
-                    <p>了解编程的基本概念和思维方式</p>
+                    <h3>Chapter 1: Functions</h3>
+                    <p>1.1 Functions, 1.2 Composite Functions, 1.3 Inverse Functions</p>
                     <a href="chapter1.html">查看详情</a>
                 </div>
                 <div class="chapter">
-                    <h3>第2章：变量与数据类型</h3>
-                    <p>学习如何存储和操作数据</p>
+                    <h3>Chapter 2: Quadratic Functions</h3>
+                    <p>2.1 Quadratic Equations and Inequalities, 2.2 Types of Roots, 2.3 Quadratic Functions</p>
                     <a href="chapter2.html">查看详情</a>
                 </div>
                 <div class="chapter">
-                    <h3>第3章：控制结构</h3>
-                    <p>条件语句和循环的使用方法</p>
+                    <h3>Chapter 3: Systems of Equations</h3>
+                    <p>3.1 Systems of Linear Equations in Three Variables, 3.2 Simultaneous Equations</p>
                     <a href="chapter3.html">查看详情</a>
                 </div>
             </div>
             <a href="chapters.html" class="see-all">查看全部章节</a>
+        </section>
+
+        <!-- 教师阵容 -->
+        <section class="teachers">
+            <h2>我们的教师阵容</h2>
+            <div class="teacher-cards">
+                <div class="teacher-card">
+                    <div class="teacher-img">
+                        <img src="/api/placeholder/120/120" alt="张教授" />
+                    </div>
+                    <div class="teacher-name">张教授</div>
+                    <div class="teacher-title">数学系教授</div>
+                    <p>拥有20年数学教学经验，擅长函数与微积分</p>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-img">
+                        <img src="/api/placeholder/120/120" alt="李博士" />
+                    </div>
+                    <div class="teacher-name">李博士</div>
+                    <div class="teacher-title">AM教材研发专家</div>
+                    <p>多年AM教学经验，精通各类考题分析</p>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-img">
+                        <img src="/api/placeholder/120/120" alt="王老师" />
+                    </div>
+                    <div class="teacher-name">王老师</div>
+                    <div class="teacher-title">高级数学讲师</div>
+                    <p>专注于应用数学教学，帮助学生解决难题</p>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -348,22 +430,21 @@
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
-                <h2>编程学习之旅</h2>
-                <p>让每个人都能轻松学习编程</p>
+                <h2>非凡教育 AM F4 刷题机器人</h2>
+                <p>让每个学生都能轻松掌握AM F4</p>
             </div>
             <div class="footer-links">
                 <h3>快速链接</h3>
                 <ul>
                     <li><a href="index.html">首页</a></li>
                     <li><a href="chapters.html">章节目录</a></li>
-                    <li><a href="resources.html">资源</a></li>
+                    <li><a href="teachers.html">教师阵容</a></li>
                     <li><a href="about.html">关于</a></li>
-                    <li><a href="contact.html">联系</a></li>
                 </ul>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2025 编程学习之旅. 保留所有权利。</p>
+            <p>&copy; 2025 非凡教育. 保留所有权利。</p>
         </div>
     </footer>
 </body>
