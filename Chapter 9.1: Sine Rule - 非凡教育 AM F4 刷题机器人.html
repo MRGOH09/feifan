@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9.1: Sine Rule | 非凡教育 AM F4 刷题机器人</title>
+    <meta name="description" content="正弦法则计算工具，帮助AM F4学生练习和掌握三角学">
+    <style>
+        /* 重置默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* 容器样式 */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+        }
+
+        header .logo {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        /* 导航样式 */
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #3498db;
+        }
+
+        /* 主要内容区域样式 */
+        main {
+            padding: 2rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 页面标题 */
+        .page-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* 计算器容器 */
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        /* 计算器头部 */
+        .calculator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .calculator-title {
+            font-size: 1.5rem;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .mode-selector {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* 正弦法则公式 */
+        .sine-rule-formula {
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .formula-title {
+            text-align: left;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .formula-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .fraction {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 0.5rem;
+        }
+
+        .numerator {
+            border-bottom: 1px solid black;
+            padding: 0 0.2rem;
+        }
+
+        .formula-subtitle {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* 输入区域 */
+        .inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .read-only {
+            background-color: #f8f9fa;
+        }
+
+        /* 按钮区域 */
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f9fe;
+        }
+
+        /* 错误消息 */
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        /* 三角形画布 */
+        .triangle-canvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        /* 计算步骤 */
+        .calculation-steps {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-logo, .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #34495e;
+            font-size: 0.9rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 20px 0;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .inputs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <div class="logo">
+            <h1>非凡教育 AM F4 刷题机器人</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="chapters.html">章节目录</a></li>
+                <li><a href="teachers.html">教师阵容</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <h1 class="page-title">Chapter 9.1: Sine Rule</h1>
+        
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <div class="calculator-title">非凡教育</div>
+                <select id="calculatorMode" class="mode-selector">
+                    <option value="angle">Find Angle / Cari Sudut</option>
+                    <option value="length">Find Length / Cari Panjang</option>
+                </select>
+            </div>
+            
+            <div class="sine-rule-formula">
+                <div class="formula-title">Formula / Formula:</div>
+                <div class="formula-display">
+                    <div class="fraction">
+                        <div class="numerator">sin A</div>
+                        <div>a</div>
+                    </div>
+                    <div>=</div>
+                    <div class="fraction">
+                        <div class="numerator">sin B</div>
+                        <div>b</div>
+                    </div>
+                    <div>=</div>
+                    <div class="fraction">
+                        <div class="numerator">sin C</div>
+                        <div>c</div>
+                    </div>
+                </div>
+                <div class="formula-subtitle">两长两度 using Sine Rules</div>
+            </div>
+            
+            <div class="inputs-grid">
+                <div class="left-inputs">
+                    <div class="input-group">
+                        <label for="sideA">Side a / Sisi a:</label>
+                        <input type="number" id="sideA" class="input-field" placeholder="Enter length / Masukkan panjang">
+                    </div>
+                    <div class="input-group">
+                        <label for="angleA">Angle A / Sudut A (°):</label>
+                        <input type="number" id="angleA" class="input-field" placeholder="Enter angle / Masukkan sudut">
+                    </div>
+                </div>
+                
+                <div class="right-inputs" id="angleModeInputs">
+                    <div class="input-group">
+                        <label for="sideB">Side b / Sisi b:</label>
+                        <input type="number" id="sideB" class="input-field" placeholder="Enter length / Masukkan panjang">
+                    </div>
+                    <div class="input-group">
+                        <label for="angleB">Angle B / Sudut B (°):</label>
+                        <input type="number" id="angleB" class="input-field read-only" readonly placeholder="Auto-calculated / Pengiraan automatik">
+                    </div>
+                </div>
+                
+                <div class="right-inputs" id="lengthModeInputs" style="display: none;">
+                    <div class="input-group">
+                        <label for="angleB2">Angle B / Sudut B (°):</label>
+                        <input type="number" id="angleB2" class="input-field" placeholder="Enter angle / Masukkan sudut">
+                    </div>
+                    <div class="input-group">
+                        <label for="sideB2">Side b / Sisi b:</label>
+                        <input type="number" id="sideB2" class="input-field read-only" readonly placeholder="Auto-calculated / Pengiraan automatik">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <button id="calculateBtn" class="btn btn-primary">Calculate / Kira</button>
+                <button id="randomBtn" class="btn btn-secondary">Random / Rawak</button>
+            </div>
+            
+            <div id="errorMessage" class="error-message"></div>
+            
+            <canvas id="triangleCanvas" width="400" height="300" class="triangle-canvas"></canvas>
+            
+            <div id="calculationSteps" class="calculation-steps" style="display: none;"></div>
+        </div>
+    </main>
+
+    <!-- 页脚区域 -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>非凡教育 AM F4 刷题机器人</h2>
+                <p>让每个学生都能轻松掌握AM F4</p>
+            </div>
+            <div class="footer-links">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="chapters.html">章节目录</a></li>
+                    <li><a href="teachers.html">教师阵容</a></li>
+                    <li><a href="about.html">关于</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 非凡教育. 保留所有权利。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const SIDE_C = 10;
+            let mode = 'angle';
+            let values = {
+                sideA: '',
+                angleA: '',
+                sideB: '',
+                angleB: ''
+            };
+            
+            // 获取DOM元素
+            const calculatorMode = document.getElementById('calculatorMode');
+            const sideA = document.getElementById('sideA');
+            const angleA = document.getElementById('angleA');
+            const sideB = document.getElementById('sideB');
+            const angleB = document.getElementById('angleB');
+            const angleB2 = document.getElementById('angleB2');
+            const sideB2 = document.getElementById('sideB2');
+            const angleModeInputs = document.getElementById('angleModeInputs');
+            const lengthModeInputs = document.getElementById('lengthModeInputs');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const randomBtn = document.getElementById('randomBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            const calculationSteps = document.getElementById('calculationSteps');
+            const canvas = document.getElementById('triangleCanvas');
+            
+            // 模式切换处理
+            calculatorMode.addEventListener('change', function() {
+                mode = this.value;
+                if (mode === 'angle') {
+                    angleModeInputs.style.display = 'block';
+                    lengthModeInputs.style.display = 'none';
+                } else {
+                    angleModeInputs.style.display = 'none';
+                    lengthModeInputs.style.display = 'block';
+                }
+                
+                // 重置输入和输出
+                values = {
+                    sideA: '',
+                    angleA: '',
+                    sideB: '',
+                    angleB: ''
+                };
+                sideA.value = '';
+                angleA.value = '';
+                sideB.value = '';
+                angleB.value = '';
+                angleB2.value = '';
+                sideB2.value = '';
+                errorMessage.textContent = '';
+                calculationSteps.style.display = 'none';
+                calculationSteps.textContent = '';
+                
+                // 清除canvas
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+            
+            // 随机生成值
+            randomBtn.addEventListener('click', function() {
+                if (mode === 'angle') {
+                    const newSideA = (Math.random() * 10 + 5).toFixed(2);
+                    const newSideB = (Math.random() * 10 + 5).toFixed(2);
+                    const newAngleA = (Math.random() * 60 + 30).toFixed(2);
+                    
+                    sideA.value = newSideA;
+                    sideB.value = newSideB;
+                    angleA.value = newAngleA;
+                    angleB.value = '';
+                } else {
+                    const newSideA = (Math.random() * 10 + 5).toFixed(2);
+                    const newAngleA = (Math.random() * 60 + 30).toFixed(2);
+                    const newAngleB = (Math.random() * 60 + 30).toFixed(2);
+                    
+                    sideA.value = newSideA;
+                    angleA.value = newAngleA;
+                    angleB2.value = newAngleB;
+                    sideB2.value = '';
+                }
+                
+                // 清除之前的计算结果
+                errorMessage.textContent = '';
+                calculationSteps.style.display = 'none';
+                calculationSteps.textContent = '';
+                
+                // 清除canvas
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+            
+            // 计算按钮点击事件
+            calculateBtn.addEventListener('click', function() {
+                if (mode === 'angle') {
+                    calculateAngleB();
+                } else {
+                    calculateSideB();
+                }
+                
+                // 绘制三角形
+                drawTriangle();
+            });
+            
+            // 计算角B
+            function calculateAngleB() {
+                const a = parseFloat(sideA.value);
+                const A = parseFloat(angleA.value);
+                const b = parseFloat(sideB.value);
+                
+                if (!a || !A || !b) {
+                    calculationSteps.style.display = 'none';
+                    return;
+                }
+                
+                try {
+                    const sinB = (b * Math.sin(A * Math.PI / 180)) / a;
+                    const B = Math.asin(sinB) * 180 / Math.PI;
+                    
+                    if (isNaN(B) || !isFinite(B)) {
+                        errorMessage.textContent = 'Invalid triangle / Segitiga tidak sah';
+                        calculationSteps.style.display = 'none';
+                        return;
+                    }
+                    
+                    if (B <= 0 || B >= 180) {
+                        errorMessage.textContent = 'Invalid angle range / Julat sudut tidak sah';
+                        calculationSteps.style.display = 'none';
+                        return;
+                    }
+                    
+                    angleB.value = B.toFixed(2);
+                    values.angleB = B;
+                    errorMessage.textContent = '';
+                    
+                    const steps = `
+Steps to calculate angle B / Langkah pengiraan sudut B:
+
+1) Using sine rule formula / Menggunakan formula sinus:
+
+   sin B      b × sin A
+   ————  =  ————————————
+     b            a
+
+2) Substituting values / Menggantikan nilai:
+
+   sin B = (${b} × sin(${A}°)) / ${a}
+   sin B = (${b} × ${Math.sin(A * Math.PI / 180).toFixed(4)}) / ${a}
+   sin B = ${sinB.toFixed(4)}
+
+3) Finding angle B / Mendapatkan sudut B:
+   B = arcsin(${sinB.toFixed(4)})
+   B = ${B.toFixed(2)}°
+
+Verification / Pengesahan:
+
+   sin ${A}°     sin ${B.toFixed(2)}°
+   ———————  =  ————————————
+     ${a}           ${b}
+
+   ${(Math.sin(A * Math.PI / 180)/a).toFixed(4)} = ${(Math.sin(B * Math.PI / 180)/b).toFixed(4)}
+`;
+                    calculationSteps.textContent = steps;
+                    calculationSteps.style.display = 'block';
+                    
+                } catch (err) {
+                    errorMessage.textContent = 'Calculation error / Ralat pengiraan';
+                    calculationSteps.style.display = 'none';
+                }
+            }
+            
+            // 计算边b
+            function calculateSideB() {
+                const a = parseFloat(sideA.value);
+                const A = parseFloat(angleA.value);
+                const B = parseFloat(angleB2.value);
+                
+                if (!a || !A || !B) {
+                    calculationSteps.style.display = 'none';
+                    return;
+                }
+                
+                try {
+                    if (A <= 0 || A >= 180 || B <= 0 || B >= 180) {
+                        errorMessage.textContent = 'Invalid angles / Sudut tidak sah';
+                        calculationSteps.style.display = 'none';
+                        return;
+                    }
+                    
+                    const b = (a * Math.sin(B * Math.PI / 180)) / Math.sin(A * Math.PI / 180);
+                    
+                    if (isNaN(b) || !isFinite(b)) {
+                        errorMessage.textContent = 'Invalid triangle / Segitiga tidak sah';
+                        calculationSteps.style.display = 'none';
+                        return;
+                    }
+                    
+                    sideB2.value = b.toFixed(2);
+                    values.sideB = b;
+                    errorMessage.textContent = '';
+                    
+                    const steps = `
+Steps to calculate side b / Langkah pengiraan sisi b:
+
+1) Using sine rule formula / Menggunakan formula sinus:
+
+   b       a
+   ── = ──────
+   sin B   sin A
+
+2) Substituting values / Menggantikan nilai:
+
+   b = (${a} × sin(${B}°)) / sin(${A}°)
+   b = (${a} × ${Math.sin(B * Math.PI / 180).toFixed(4)}) / ${Math.sin(A * Math.PI / 180).toFixed(4)}
+   b = ${b.toFixed(4)}
+
+Verification / Pengesahan:
+
+   ${b.toFixed(2)}     ${a}
+   ────────── = ──────────
+   sin(${B}°)   sin(${A}°)
+
+   ${(b/Math.sin(B * Math.PI / 180)).toFixed(4)} = ${(a/Math.sin(A * Math.PI / 180)).toFixed(4)}
+`;
+                    calculationSteps.textContent = steps;
+                    calculationSteps.style.display = 'block';
+                    
+                } catch (err) {
+                    errorMessage.textContent = 'Calculation error / Ralat pengiraan';
+                    calculationSteps.style.display = 'none';
+                }
+            }
+            
+            // 绘制三角形
+            function drawTriangle() {
+                const ctx = canvas.getContext('2d');
+                const width = canvas.width;
+                const height = canvas.height;
+                
+                // 清除画布
+                ctx.clearRect(0, 0, width, height);
+                
+                const a = parseFloat(sideA.value);
+                const A = parseFloat(angleA.value) * Math.PI / 180;
+                let b, B;
+                
+                if (mode === 'angle') {
+                    b = parseFloat(sideB.value);
+                    B = parseFloat(angleB.value || 0) * Math.PI / 180;
+                } else {
+                    b = parseFloat(sideB2.value || 0);
+                    B = parseFloat(angleB2.value) * Math.PI / 180;
+                }
+                
+                if (!a || !b || isNaN(A) || isNaN(B)) return;
+                
+                // 缩放因子
+                const scale = Math.min(width, height) / Math.max(a, b, SIDE_C) * 0.4;
+                
+                // 计算顶点坐标
+                const x1 = width / 2;
+                const y1 = height * 0.6;
+                const x2 = x1 - SIDE_C * scale;
+                const y2 = y1;
+                const x3 = x1 - b * scale * Math.cos(A);
+                const y3 = y1 - b * scale * Math.sin(A);
+                
+                // 绘制三角形
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.lineTo(x3, y3);
+                ctx.closePath();
+                ctx.strokeStyle = '#2563eb';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // 添加标注
+                ctx.font = '14px Arial';
+                ctx.fillStyle = '#000';
+                
+                ctx.fillText(`a: ${parseFloat(a).toFixed(2)}`, (x1 + x3) / 2 + 10, (y1 + y3) / 2);
+                ctx.fillText(`b: ${parseFloat(b).toFixed(2)}`, (x2 + x3) / 2 - 30, (y2 + y3) / 2);
+                
+                const angleAText = parseFloat(angleA.value).toFixed(1);
+                let angleBText;
+                
+                if (mode === 'angle') {
+                    angleBText = angleB.value ? parseFloat(angleB.value).toFixed(1) : '?';
+                } else {
+                    angleBText = parseFloat(angleB2.value).toFixed(1);
+                }
+                
+                ctx.fillText(`A: ${angleAText}°`, x1 + 10, y1 - 5);
+                ctx.fillText(`B: ${angleBText}°`, x2 - 40, y2 - 5);
+            }
+        });
+    </script>
+</body>
+</html>
